@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@drawable/bg_category">
+
+    <!-- Header with Back Button, Title, and Volume Icon -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:background="#1E88E5"
+        android:orientation="horizontal"
+        android:gravity="center_vertical">
+
+        <!-- Back Arrow -->
+        <ImageView
+            android:id="@+id/backButton"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_marginStart="16dp"
+            android:src="@drawable/ic_media_previous"
+            android:contentDescription="Back"
+            android:foreground="?attr/selectableItemBackground"/>
+
+        <!-- Title -->
+        <TextView
+            android:id="@+id/title"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="CATEGORY"
+            android:textSize="24sp"
+            android:textStyle="bold"
+            android:textColor="@android:color/white"
+            android:gravity="center"
+            android:layout_marginStart="0dp"/>
+
+        <!-- Volume Icon (Mute/Unmute) -->
+        <ImageView
+            android:id="@+id/volumeIcon"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_marginEnd="16dp"
+            android:src="@drawable/ic_volume_up"
+            android:contentDescription="Toggle Volume"
+            android:foreground="?attr/selectableItemBackground"/>
+    </LinearLayout>
+
+    <!-- Content -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:gravity="center"
+        android:padding="20dp">
+
+        <!-- Buttons -->
+        <Button
+            android:id="@+id/btnPHNI"
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
+            android:text="Philippine History and National Identity"
+            android:backgroundTint="#1E88E5"
+            android:textSize="24sp"
+            android:textColor="@android:color/white"
+            android:layout_marginBottom="10dp"/>
+
+        <Button
+            android:id="@+id/btnPCA"
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
+            android:text="Philippine Culture and Arts"
+            android:backgroundTint="#ED3939"
+            android:textSize="24sp"
+            android:textColor="@android:color/white"
+            android:layout_marginBottom="10dp"/>
+
+        <Button
+            android:id="@+id/btnPGNW"
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
+            android:text="Philippine Geography and National Wonders"
+            android:backgroundTint="#FFC107"
+            android:textSize="24sp"
+            android:textColor="@android:color/white"
+            android:layout_marginBottom="10dp"/>
+
+        <Button
+            android:id="@+id/btnPLD"
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
+            android:text="Philippine Language and Dialects"
+            android:backgroundTint="#1E88E5"
+            android:textSize="24sp"
+            android:textColor="@android:color/white"
+            android:layout_marginBottom="10dp"/>
+
+        <Button
+            android:id="@+id/btnPGS"
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
+            android:text="Philippine Government and Society"
+            android:backgroundTint="#ED3939"
+            android:textSize="24sp"
+            android:textColor="@android:color/white"/>
+    </LinearLayout>
+
+</LinearLayout>

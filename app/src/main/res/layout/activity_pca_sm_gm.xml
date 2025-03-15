@@ -1,0 +1,171 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+android:layout_width="match_parent"
+android:layout_height="match_parent"
+android:orientation="vertical"
+android:background="#88D58B">
+
+<FrameLayout
+    android:layout_width="match_parent"
+    android:layout_height="60dp"
+    android:background="#4CAF50"
+    android:elevation="4dp"
+    android:layout_marginBottom="20dp"
+    android:gravity="center">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="SURVIVAL MODE"
+        android:textSize="30sp"
+        android:textStyle="bold"
+        android:textColor="@android:color/white"
+        android:gravity="center"
+        android:layout_gravity="center"/>
+</FrameLayout>
+
+
+<!-- Progress and Timer -->
+<TextView
+    android:id="@+id/progressText"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:text="Question 1 of 15"
+    android:textSize="24sp"
+    android:textStyle="bold"
+    android:textColor="@android:color/black"
+    android:layout_marginBottom="10dp"
+    android:layout_marginTop="10sp"
+    android:layout_gravity="center_horizontal"/>
+
+<TextView
+    android:id="@+id/lifeText"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:text="Lives: ❤️❤️"
+    android:textSize="20sp"
+    android:textColor="@android:color/holo_red_dark"
+    android:layout_marginBottom="10dp"
+    android:layout_gravity="center_horizontal"/>
+
+<!-- Question Box -->
+<androidx.cardview.widget.CardView
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="100dp"
+    app:cardCornerRadius="8dp"
+    app:cardElevation="10dp"
+    android:layout_marginBottom="20dp"
+    android:layout_marginRight="20dp"
+    android:layout_marginLeft="20dp">
+
+    <TextView
+        android:id="@+id/questionText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="22sp"
+        android:textStyle="bold"
+        android:textColor="@android:color/black"
+        android:padding="10dp"
+        android:scrollbars="vertical"
+        android:gravity="center"
+        android:background="@android:color/white"/>
+</androidx.cardview.widget.CardView>
+
+
+    <!-- Answer Buttons -->
+    <Button
+        android:id="@+id/optionA"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Option A"
+        android:textSize="18sp"
+        android:background="@android:color/white"
+        android:layout_marginBottom="10dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginLeft="20dp"
+        android:elevation="100dp"
+        android:foreground="?attr/selectableItemBackground"/>
+
+    <Button
+        android:id="@+id/optionB"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Option B"
+        android:textSize="18sp"
+        android:background="@android:color/white"
+        android:layout_marginBottom="10dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginLeft="20dp"
+        android:foreground="?attr/selectableItemBackground"/>
+
+    <Button
+        android:id="@+id/optionC"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Option C"
+        android:textSize="18sp"
+        android:background="@android:color/white"
+        android:layout_marginBottom="10dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginLeft="20dp"
+        android:foreground="?attr/selectableItemBackground"/>
+
+    <Button
+        android:id="@+id/optionD"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Option D"
+        android:textSize="18sp"
+        android:background="@android:color/white"
+        android:layout_marginBottom="10dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginLeft="20dp"
+        android:foreground="?attr/selectableItemBackground"/>
+
+    <!-- Answer Explanation -->
+    <TextView
+        android:id="@+id/answerDescription"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text=""
+        android:textSize="16sp"
+        android:textColor="@android:color/holo_blue_dark"
+        android:visibility="gone"
+        android:layout_marginTop="10dp"/>
+
+    <!-- Restart and Exit Buttons in Same Row -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center"
+        android:layout_marginTop="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginLeft="20dp">
+
+        <Button
+            android:id="@+id/restartButton"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:text="Restart Quiz"
+            android:textSize="16sp"
+            android:background="#1E88E5"
+            android:textColor="@android:color/white"
+            android:layout_marginEnd="10dp"
+            android:foreground="?attr/selectableItemBackground"/>
+
+        <Button
+            android:id="@+id/exitButton"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:text="Exit Quiz"
+            android:textSize="16sp"
+            android:background="#E53935"
+            android:textColor="@android:color/white"
+            android:foreground="?attr/selectableItemBackground"/>
+    </LinearLayout>
+
+</LinearLayout>
+
