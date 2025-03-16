@@ -150,8 +150,26 @@ public class PLD_SM_ACTIVITY extends AppCompatActivity {
         if (isFinishing()) return;
 
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setTitle(title)
-                .setMessage(message)
+
+        // Create a custom TextView for the title (Correct/Wrong Answer)
+        TextView titleView = new TextView(this);
+        titleView.setText(title);
+        titleView.setTextSize(30); // Bigger title size
+        titleView.setTextColor(isCorrect ? getResources().getColor(android.R.color.holo_green_dark)
+                : getResources().getColor(android.R.color.holo_red_dark)); // Green for correct, red for wrong
+        titleView.setPadding(50, 40, 50, 20);
+        titleView.setGravity(View.TEXT_ALIGNMENT_CENTER); // Center align
+
+        // Create a custom TextView for the message (Explanation)
+        TextView messageView = new TextView(this);
+        messageView.setText(message);
+        messageView.setTextSize(22); // Bigger message size
+        messageView.setTextColor(getResources().getColor(android.R.color.black));
+        messageView.setPadding(50, 20, 50, 20);
+        messageView.setGravity(View.TEXT_ALIGNMENT_CENTER); // Center align
+
+        builder.setCustomTitle(titleView) // Use custom title
+                .setView(messageView) // Set custom message
                 .setCancelable(false);
 
         if (isCorrect) {
@@ -179,28 +197,67 @@ public class PLD_SM_ACTIVITY extends AppCompatActivity {
     }
 
     private void showNoMoreLivesDialog() {
-        new AlertDialog.Builder(this)
-                .setTitle("No More Lives!")
-                .setMessage("You have no more lives left.")
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+
+        // Create a custom TextView for the title
+        TextView titleView = new TextView(this);
+        titleView.setText("No More Lives!");
+        titleView.setTextSize(30); // Bigger title size
+        titleView.setTextColor(getResources().getColor(android.R.color.holo_red_dark)); // Red color for warning
+        titleView.setPadding(50, 40, 50, 20);
+        titleView.setGravity(View.TEXT_ALIGNMENT_CENTER); // Center align
+
+        // Create a custom TextView for the message
+        TextView messageView = new TextView(this);
+        messageView.setText("You have no more lives left.");
+        messageView.setTextSize(22); // Bigger message size
+        messageView.setTextColor(getResources().getColor(android.R.color.black));
+        messageView.setPadding(50, 20, 50, 20);
+        messageView.setGravity(View.TEXT_ALIGNMENT_CENTER); // Center align
+
+        builder.setCustomTitle(titleView) // Use custom title
+                .setView(messageView) // Set custom message
                 .setCancelable(false)
                 .setPositiveButton("Try Again", (dialog, which) -> {
                     lives = 2;
                     updateLifeText();
                     showQuestion();
                 })
-                .setNegativeButton("Restart", (dialog, which) -> restartQuiz())
-                .show();
+                .setNegativeButton("Restart", (dialog, which) -> restartQuiz());
+
+        AlertDialog dialog = builder.create();
+        dialog.show();
     }
 
     private void showFinishScreen() {
         dbHelper.clearPLDSMProgress(userId);
-        new AlertDialog.Builder(this)
-                .setTitle("Quiz Finished!")
-                .setMessage("You have completed the quiz.")
+
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+
+        // Create a custom TextView for the title
+        TextView titleView = new TextView(this);
+        titleView.setText("Quiz Finished!");
+        titleView.setTextSize(30); // Bigger title size
+        titleView.setTextColor(getResources().getColor(android.R.color.holo_blue_dark));
+        titleView.setPadding(50, 40, 50, 20);
+        titleView.setGravity(View.TEXT_ALIGNMENT_CENTER); // Center align
+
+        // Create a custom TextView for the message
+        TextView messageView = new TextView(this);
+        messageView.setText("You have completed the quiz.");
+        messageView.setTextSize(22); // Bigger message size
+        messageView.setTextColor(getResources().getColor(android.R.color.black));
+        messageView.setPadding(50, 20, 50, 20);
+        messageView.setGravity(View.TEXT_ALIGNMENT_CENTER); // Center align
+
+        builder.setCustomTitle(titleView) // Use custom title
+                .setView(messageView) // Set custom message
                 .setCancelable(false)
                 .setPositiveButton("Restart", (dialog, which) -> restartQuiz())
-                .setNegativeButton("Exit", (dialog, which) -> exitToPLDActivity())
-                .show();
+                .setNegativeButton("Exit", (dialog, which) -> exitToPLDActivity());
+
+        AlertDialog dialog = builder.create();
+        dialog.show();
     }
 
     private void restartQuiz() {
@@ -219,13 +276,34 @@ public class PLD_SM_ACTIVITY extends AppCompatActivity {
         dbHelper.savePLDSMProgress(userId, currentQuestionIndex, lives);
     }
 
+
     private void showExitConfirmation() {
-        new AlertDialog.Builder(this)
-                .setTitle("Exit Quiz")
-                .setMessage("Do you want to exit? Your progress will be saved.")
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+
+        // Create a custom TextView for the title
+        TextView titleView = new TextView(this);
+        titleView.setText("Exit Quiz");
+        titleView.setTextSize(30); // Bigger title size
+        titleView.setTextColor(getResources().getColor(android.R.color.holo_red_dark)); // Red color for warning
+        titleView.setPadding(50, 40, 50, 20);
+        titleView.setGravity(View.TEXT_ALIGNMENT_CENTER); // Center align
+
+        // Create a custom TextView for the message
+        TextView messageView = new TextView(this);
+        messageView.setText("Do you want to exit? Your progress will be saved.");
+        messageView.setTextSize(22); // Bigger message size
+        messageView.setTextColor(getResources().getColor(android.R.color.black));
+        messageView.setPadding(50, 20, 50, 20);
+        messageView.setGravity(View.TEXT_ALIGNMENT_CENTER); // Center align
+
+        builder.setCustomTitle(titleView) // Use custom title
+                .setView(messageView) // Set custom message
+                .setCancelable(false)
                 .setPositiveButton("Yes", (dialog, which) -> exitToPLDActivity())
-                .setNegativeButton("No", (dialog, which) -> dialog.dismiss())
-                .show();
+                .setNegativeButton("No", (dialog, which) -> dialog.dismiss());
+
+        AlertDialog dialog = builder.create();
+        dialog.show();
     }
 
     private void exitToPLDActivity() {

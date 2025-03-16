@@ -77,13 +77,34 @@ public class PGNW_TT_ACTIVITY extends AppCompatActivity {
         quizMusic.start();
     }
 
+
     private void showExitConfirmation() {
-        new AlertDialog.Builder(this)
-                .setTitle("Exit Quiz")
-                .setMessage("Do you want to exit? Your progress will be saved.")
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+
+        // Create a custom TextView for the title
+        TextView titleView = new TextView(this);
+        titleView.setText("Exit Quiz");
+        titleView.setTextSize(30); // Bigger title size
+        titleView.setTextColor(getResources().getColor(android.R.color.holo_red_dark));
+        titleView.setPadding(50, 40, 50, 20);
+        titleView.setGravity(View.TEXT_ALIGNMENT_CENTER); // Center align
+
+        // Create a custom TextView for the message
+        TextView messageView = new TextView(this);
+        messageView.setText("Do you want to exit? Your progress will be saved.");
+        messageView.setTextSize(22); // Bigger message size
+        messageView.setTextColor(getResources().getColor(android.R.color.black));
+        messageView.setPadding(50, 20, 50, 20);
+        messageView.setGravity(View.TEXT_ALIGNMENT_CENTER); // Center align
+
+        builder.setCustomTitle(titleView) // Use custom title
+                .setView(messageView) // Set custom message
+                .setCancelable(false)
                 .setPositiveButton("Yes", (dialog, which) -> exitToPGNWActivity())
-                .setNegativeButton("No", (dialog, which) -> dialog.dismiss())
-                .show();
+                .setNegativeButton("No", (dialog, which) -> dialog.dismiss());
+
+        AlertDialog dialog = builder.create();
+        dialog.show();
     }
 
     private void exitToPGNWActivity() {
@@ -163,10 +184,29 @@ public class PGNW_TT_ACTIVITY extends AppCompatActivity {
         }
     }
 
+
     private void showAnswerPopup(String title, String message, boolean isCorrect) {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setTitle(title)
-                .setMessage(message)
+
+        // Create a TextView for the title (Correct/Wrong Answer)
+        TextView titleView = new TextView(this);
+        titleView.setText(title);
+        titleView.setTextSize(30); // Bigger title size
+        titleView.setTextColor(isCorrect ? getResources().getColor(android.R.color.holo_green_dark)
+                : getResources().getColor(android.R.color.holo_red_dark));
+        titleView.setPadding(50, 40, 50, 20);
+        titleView.setGravity(View.TEXT_ALIGNMENT_CENTER); // Center align
+
+        // Create a TextView for the message (Explanation)
+        TextView messageView = new TextView(this);
+        messageView.setText(message);
+        messageView.setTextSize(22); // Set text size
+        messageView.setTextColor(getResources().getColor(android.R.color.black));
+        messageView.setPadding(50, 20, 50, 20);
+        messageView.setGravity(View.TEXT_ALIGNMENT_CENTER); // Center align
+
+        builder.setCustomTitle(titleView) // Use custom title
+                .setView(messageView) // Set custom view with bigger text
                 .setCancelable(false);
 
         if (isCorrect) {
@@ -191,6 +231,7 @@ public class PGNW_TT_ACTIVITY extends AppCompatActivity {
         }
     }
 
+
     private void showFinishScreen() {
         timerHandler.removeCallbacks(timerRunnable);
         dbHelper.clearPGNWTTProgress(userId);
@@ -204,13 +245,32 @@ public class PGNW_TT_ACTIVITY extends AppCompatActivity {
         String timeTakenMessage = String.format(Locale.getDefault(),
                 "You have completed the quiz in %02d minutes and %02d seconds.", minutes, seconds);
 
-        new AlertDialog.Builder(this)
-                .setTitle("Quiz Finished!")
-                .setMessage(timeTakenMessage)
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+
+        // Create a custom TextView for the title
+        TextView titleView = new TextView(this);
+        titleView.setText("Quiz Finished!");
+        titleView.setTextSize(30); // Bigger title size
+        titleView.setTextColor(getResources().getColor(android.R.color.holo_blue_dark));
+        titleView.setPadding(50, 40, 50, 20);
+        titleView.setGravity(View.TEXT_ALIGNMENT_CENTER); // Center align
+
+        // Create a custom TextView for the message
+        TextView messageView = new TextView(this);
+        messageView.setText(timeTakenMessage);
+        messageView.setTextSize(22); // Bigger message size
+        messageView.setTextColor(getResources().getColor(android.R.color.black));
+        messageView.setPadding(50, 20, 50, 20);
+        messageView.setGravity(View.TEXT_ALIGNMENT_CENTER); // Center align
+
+        builder.setCustomTitle(titleView) // Use custom title
+                .setView(messageView) // Set custom view for the message
                 .setCancelable(false)
                 .setPositiveButton("Restart", (dialog, which) -> restartQuiz())
-                .setNegativeButton("Exit", (dialog, which) -> exitToPGNWActivity())
-                .show();
+                .setNegativeButton("Exit", (dialog, which) -> exitToPGNWActivity());
+
+        AlertDialog dialog = builder.create();
+        dialog.show();
     }
 
 

@@ -141,12 +141,29 @@ public class PGS_FM_ACTIVITY extends AppCompatActivity {
         if (isFinishing()) return; // Prevent crash if activity is not valid
 
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setTitle("Time's Up!")
-                .setMessage("You ran out of time!")
+
+        // Create a custom TextView for the title
+        TextView titleView = new TextView(this);
+        titleView.setText("Time's Up!");
+        titleView.setTextSize(30); // Bigger title size
+        titleView.setTextColor(getResources().getColor(android.R.color.holo_red_dark)); // Red color for urgency
+        titleView.setPadding(50, 40, 50, 20);
+        titleView.setGravity(View.TEXT_ALIGNMENT_CENTER); // Center align
+
+        // Create a custom TextView for the message
+        TextView messageView = new TextView(this);
+        messageView.setText("You ran out of time!");
+        messageView.setTextSize(22); // Bigger message size
+        messageView.setTextColor(getResources().getColor(android.R.color.black));
+        messageView.setPadding(50, 20, 50, 20);
+        messageView.setGravity(View.TEXT_ALIGNMENT_CENTER); // Center align
+
+        builder.setCustomTitle(titleView) // Use custom title
+                .setView(messageView) // Set custom message
                 .setCancelable(false)
                 .setPositiveButton("Restart", (dialog, which) -> restartQuiz())
                 .setNegativeButton("Try Again", (dialog, which) -> {
-                    timeRemaining = timeLimit; // Reset timer to 20 seconds
+                    timeRemaining = timeLimit; // Reset timer
                     startTimer(); // Restart timer
                 });
 
@@ -191,8 +208,26 @@ public class PGS_FM_ACTIVITY extends AppCompatActivity {
         if (isFinishing()) return;
 
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setTitle(title)
-                .setMessage(message)
+
+        // Create a custom TextView for the title (Correct/Wrong Answer)
+        TextView titleView = new TextView(this);
+        titleView.setText(title);
+        titleView.setTextSize(30); // Bigger title size
+        titleView.setTextColor(isCorrect ? getResources().getColor(android.R.color.holo_green_dark)
+                : getResources().getColor(android.R.color.holo_red_dark)); // Green for correct, red for wrong
+        titleView.setPadding(50, 40, 50, 20);
+        titleView.setGravity(View.TEXT_ALIGNMENT_CENTER); // Center align
+
+        // Create a custom TextView for the message (Explanation)
+        TextView messageView = new TextView(this);
+        messageView.setText(message);
+        messageView.setTextSize(22); // Bigger message size
+        messageView.setTextColor(getResources().getColor(android.R.color.black));
+        messageView.setPadding(50, 20, 50, 20);
+        messageView.setGravity(View.TEXT_ALIGNMENT_CENTER); // Center align
+
+        builder.setCustomTitle(titleView) // Use custom title
+                .setView(messageView) // Set custom message
                 .setCancelable(false);
 
         if (isCorrect) {
@@ -226,16 +261,37 @@ public class PGS_FM_ACTIVITY extends AppCompatActivity {
     }
 
 
+
     private void showFinishScreen() {
         timerHandler.removeCallbacks(timerRunnable);
         dbHelper.clearPGSFMProgress(userId);
-        new AlertDialog.Builder(this)
-                .setTitle("Quiz Finished!")
-                .setMessage("You have completed the quiz.")
+
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+
+        // Create a custom TextView for the title
+        TextView titleView = new TextView(this);
+        titleView.setText("Quiz Finished!");
+        titleView.setTextSize(30); // Bigger title size
+        titleView.setTextColor(getResources().getColor(android.R.color.holo_blue_dark)); // Blue for emphasis
+        titleView.setPadding(50, 40, 50, 20);
+        titleView.setGravity(View.TEXT_ALIGNMENT_CENTER); // Center align
+
+        // Create a custom TextView for the message
+        TextView messageView = new TextView(this);
+        messageView.setText("You have completed the quiz.");
+        messageView.setTextSize(22); // Bigger message size
+        messageView.setTextColor(getResources().getColor(android.R.color.black));
+        messageView.setPadding(50, 20, 50, 20);
+        messageView.setGravity(View.TEXT_ALIGNMENT_CENTER); // Center align
+
+        builder.setCustomTitle(titleView) // Use custom title
+                .setView(messageView) // Set custom message
                 .setCancelable(false)
                 .setPositiveButton("Restart", (dialog, which) -> restartQuiz())
-                .setNegativeButton("Exit", (dialog, which) -> exitToPGSActivity())
-                .show();
+                .setNegativeButton("Exit", (dialog, which) -> exitToPGSActivity());
+
+        AlertDialog dialog = builder.create();
+        dialog.show();
     }
 
     private void restartQuiz() {
@@ -254,12 +310,32 @@ public class PGS_FM_ACTIVITY extends AppCompatActivity {
 
 
     private void showExitConfirmation() {
-        new AlertDialog.Builder(this)
-                .setTitle("Exit Quiz")
-                .setMessage("Do you want to exit? Your progress will be saved.")
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+
+        // Create a custom TextView for the title
+        TextView titleView = new TextView(this);
+        titleView.setText("Exit Quiz");
+        titleView.setTextSize(30); // Bigger title size
+        titleView.setTextColor(getResources().getColor(android.R.color.holo_red_dark)); // Red for urgency
+        titleView.setPadding(50, 40, 50, 20);
+        titleView.setGravity(View.TEXT_ALIGNMENT_CENTER); // Center align
+
+        // Create a custom TextView for the message
+        TextView messageView = new TextView(this);
+        messageView.setText("Do you want to exit? Your progress will be saved.");
+        messageView.setTextSize(22); // Bigger message size
+        messageView.setTextColor(getResources().getColor(android.R.color.black));
+        messageView.setPadding(50, 20, 50, 20);
+        messageView.setGravity(View.TEXT_ALIGNMENT_CENTER); // Center align
+
+        builder.setCustomTitle(titleView) // Use custom title
+                .setView(messageView) // Set custom message
+                .setCancelable(false)
                 .setPositiveButton("Yes", (dialog, which) -> exitToPGSActivity())
-                .setNegativeButton("No", (dialog, which) -> dialog.dismiss())
-                .show();
+                .setNegativeButton("No", (dialog, which) -> dialog.dismiss());
+
+        AlertDialog dialog = builder.create();
+        dialog.show();
     }
 
     private void exitToPGSActivity() {
